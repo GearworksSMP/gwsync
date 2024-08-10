@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option go_package = "github.com/gearworkssmp/gwsync";
+option java_multiple_files = true;
+option java_package = "com.gearworkssmp.gearworks.gwsync";
+option java_outer_classname = "GWSync";
+
+package gearworks;
+
+// The sync service definition.
+service Sync {
+  // Saves the player state with achievements and inventory
+  rpc SavePlayerState (SaveStateRequest) returns (SaveStateReply) {}
+  // Loads the player state with achievements and inventory
+  rpc LoadPlayerState (LoadStateRequest) returns (LoadStateReply) {}
+  // Handle chat messages
+  rpc HandleChat(stream ChatMessage) returns (stream ChatMessage) {}
+}
+
+message SaveStateRequest {
+  string user_id = 1;
+}
+
+message SaveStateReply {
+  string user_id = 1;
+}
+
+message LoadStateRequest {
+  string user_id = 1;
+}
+
+message LoadStateReply {
+  string user_id = 1;
+}
+
+message ChatMessage {
+  string user_id = 1;
+  string username = 2;
+  string message = 3;
+}
